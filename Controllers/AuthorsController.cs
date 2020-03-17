@@ -12,14 +12,10 @@ namespace Fisher.Bookstore.Controllers
     public class AuthorsController: ControllerBase
     {
         
-        [HttpGet("{authorId}")]
-        public IActionResult Get(int authorId)
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            if(!authorsRepository.AuthorExists(authorId))
-            {
-                return NotFound();
-            }
-            return Ok(authorsRepository.GetAuthor(authorId));
+            return Ok(authorsRepository.GetAuthors());
         }
         private IAuthorsRepository authorsRepository;
         public AuthorsController(IAuthorsRepository repository)
