@@ -3,8 +3,6 @@ using System;
 using Fisher.Bookstore.Models;
 using Fisher.Bookstore.Services;
 
-
-
 namespace Fisher.Bookstore.Controllers
 {
     [ApiController]
@@ -26,6 +24,7 @@ namespace Fisher.Bookstore.Controllers
         {
             return Ok(booksRepository.GetBooks());
         }
+
         private IBooksRepository booksRepository;
         public BooksController(IBooksRepository repository)
         {
