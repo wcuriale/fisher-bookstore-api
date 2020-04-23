@@ -3,8 +3,6 @@ using System;
 using Fisher.Bookstore.Models;
 using Fisher.Bookstore.Services;
 
-
-
 namespace Fisher.Bookstore.Controllers
 {
     [ApiController]
@@ -12,11 +10,21 @@ namespace Fisher.Bookstore.Controllers
     public class BooksController: ControllerBase
     {
         
+        [HttpGet("{bookId}")]
+        public IActionResult Get(int bookId)
+        {      
+            if(!booksRepository.BookExists(bookId))
+            {
+                return NotFound();
+            }
+                return Ok(booksRepository.GetBook(bookId));        
+        }
         [HttpGet]
         public IActionResult GetAll()
         {
             return Ok(booksRepository.GetBooks());
         }
+
         private IBooksRepository booksRepository;
         public BooksController(IBooksRepository repository)
         {

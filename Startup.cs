@@ -1,16 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Fisher.Bookstore.Data;
+using Microsoft.EntityFrameworkCore;
 using Fisher.Bookstore.Services;
+using Fisher.Bookstore.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace Fisher.Bookstore
 {
@@ -28,8 +26,10 @@ namespace Fisher.Bookstore
         {
             services.AddControllers();
             services.AddCors();
-            services.AddSingleton<IBooksRepository, TestBooksRepository>();
-            services.AddSingleton<IAuthorsRepository, TestAuthorsRepository>();
+            services.AddDbContext<BookstoreContext>(options => options.UseNpgsql(Configuration.GetConnectionString("BookstoreContext")));
+            services.AddScoped<IBooksRepository, BooksRepository>();
+            services.AddScoped<IAuthorsRepository, AuthorsRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
