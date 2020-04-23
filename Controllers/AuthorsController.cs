@@ -12,14 +12,14 @@ namespace Fisher.Bookstore.Controllers
     public class AuthorsController: ControllerBase
     {
         
-        [HttpGet]
+        [HttpGet]//for all objects
         public IActionResult GetAll()
         {
             return Ok(authorsRepository.GetAuthors());
         }
         [HttpGet("{authorId}")]
 
-        public IActionResult GetAuthor(int authorId)
+        public IActionResult GetAuthor(int authorId)//for specific objects
         {
             if(!authorsRepository.AuthorExists(authorId))
             {
@@ -33,12 +33,12 @@ namespace Fisher.Bookstore.Controllers
             authorsRepository = repository;
         }
         [HttpPost]
-        public IActionResult Post([FromBody]Author author)
+        public IActionResult Post([FromBody]Author author)//for creating objects
         {
             var authorId = authorsRepository.AddAuthor(author);
             return Created($"https://localhost:5001/api/authors/{authorId}", author);
         }
-        [HttpPut("{authorId}")]
+        [HttpPut("{authorId}")]//for updating objects
         public IActionResult Put(int authorId, [FromBody]Author author)
         {
             if(authorId != author.Id)
@@ -52,7 +52,7 @@ namespace Fisher.Bookstore.Controllers
             authorsRepository.UpdateAuthor(author);
             return Ok(author);
         }
-        [HttpDelete("{authorId}")]
+        [HttpDelete("{authorId}")]//for deleting objects
         public IActionResult Delete(int authorId)
         {
             
