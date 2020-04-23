@@ -12,6 +12,15 @@ namespace Fisher.Bookstore.Controllers
     public class BooksController: ControllerBase
     {
         
+        [HttpGet("{bookId}")]
+        public IActionResult Get(int bookId)
+        {      
+            if(!booksRepository.BookExists(bookId))
+            {
+                return NotFound();
+            }
+                return Ok(booksRepository.GetBook(bookId));        
+        }
         [HttpGet]
         public IActionResult GetAll()
         {
