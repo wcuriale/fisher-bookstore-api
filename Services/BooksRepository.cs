@@ -22,7 +22,9 @@ namespace Fisher.Bookstore.Services
 
         public bool BookExists(int bookId)
         {
+
            return (db.Books.Find(bookId) != null );
+
         }
 
         public void DeleteBook(int bookId)
