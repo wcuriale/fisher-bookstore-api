@@ -6,8 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Fisher.Bookstore.Data;
 using Microsoft.EntityFrameworkCore;
 using Fisher.Bookstore.Services;
-using Fisher.Bookstore.Data;
-using Microsoft.EntityFrameworkCore;
+
 
 
 namespace Fisher.Bookstore
