@@ -40,7 +40,7 @@ namespace Fisher.Bookstore
             }).AddJwtBearer(options =>
             {
                 options.Authority = domain;
-                options.Audience = Configuration["Auth0"];
+                options.Audience = Configuration["Auth0:ApiIdentifier"];
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     NameClaimType = ClaimTypes.NameIdentifier
@@ -49,8 +49,7 @@ namespace Fisher.Bookstore
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("read:messages", policy => policy.Requirements.Add(new 
-                HasScopeRequirement("read:messages", domain)));
+                options.AddPolicy("read:messages", policy => policy.Requirements.Add(new HasScopeRequirement("read:messages", domain)));
             });
             services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
         }
